@@ -1,0 +1,94 @@
+<%- include("partials/header.ejs") %>
+<main id="update">
+  <div class="container">
+    <% if (locals.error) { %>
+    <h1 class="mb-4"><%= error %></h1>
+    <% } else { %>
+    <h1 class="mb-4">Update Your Book Note</h1>
+    <% } %>
+    <form action="/update<%=note.id%>" method="post">
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label for="book" class="form-label">Name of the book</label>
+          <input
+            value="<%= note.book %>"
+            type="text"
+            name="book"
+            id="book"
+            class="form-control input"
+            placeholder="The Lord of the Rings: The Fellowship of the Ring"
+            required
+          />
+        </div>
+        <div class="mb-3 col-6">
+          <label for="author" class="form-label">Author of the book</label>
+          <input
+            value="<%= note.author %>"
+            type="text"
+            name="author"
+            id="author"
+            class="form-control input"
+            placeholder="J.R.R. Tolkien"
+            required
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-4">
+          <label for="date" class="form-label">Date of reading</label>
+          <input
+            value="<%= note.formatted_date %>"
+            type="datetime"
+            name="date"
+            id="date"
+            class="form-control input"
+            placeholder="2-25-2024"
+            required
+          />
+        </div>
+
+        <div class="mb-3 col-4">
+          <label for="rating" class="form-label">Rating of the book</label>
+          <input
+            value="<%= note.rating %>"
+            type="number"
+            min="0"
+            max="10"
+            name="rating"
+            id="rating"
+            class="form-control input"
+            placeholder="Rate the book out of 10"
+            required
+          />
+        </div>
+        <div class="mb-3 col-4">
+          <label for="isbn" class="form-label">ISBN of the book</label>
+          <input
+            value="<%= note.isbn %>"
+            type="text"
+            name="isbn"
+            id="isbn"
+            class="form-control input"
+            placeholder=" 0345339695"
+            required
+          />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="notes" class="form-label">Your Notes</label>
+        <textarea
+          name="notes"
+          id="notes"
+          cols="30"
+          rows="10"
+          class="form-control input"
+          required
+        >
+<%= note.note %></textarea
+        >
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+      <a href="/" class="btn btn-secondary ms-3">Home</a>
+    </form>
+  </div>
+</main>

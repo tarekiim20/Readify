@@ -1,0 +1,49 @@
+<%- include("partials/header.ejs") %>
+<main id="notesPage">
+  <div class="container mt-5 text-end text-uppercase" id="header">
+    <h1 class="text-center">Your Book's Notes</h1>
+    <p class="lead mt-2 text-center">
+      Start writing your notes to your favorite books.
+    </p>
+    <a href="/new" class="btn btn-success mt-2 me-3 text-end"
+      >Create a new Note</a
+    >
+  </div>
+  <div class="container mt-md-5" id="notesContainer">
+    <% notes.forEach(note => { %>
+
+    <div class="row flex-row" id="box">
+      <div class="col-md-4 col-12 mb-md-0 my-5 mt-md-0 p-md-5">
+        <img
+          src="https://covers.openlibrary.org/b/isbn/<%=note.isbn%>-M.jpg"
+          alt="Image Cover"
+          class="img-fluid"
+        />
+      </div>
+      <div
+        class="col-md-8 col-12 px-4 d-flex flex-column justify-content-center text-center"
+      >
+        <h2 class="mb-3 text-uppercase text-start">
+          <%= note.book %> <span class="mx-1 fs-4 fw-bold">-BY</span> <%=
+          note.author%>
+        </h2>
+        <div class="row text-uppercase mb-3 dateAndRating">
+          <p class="lead fw-light fs-6 col-lg-6 col-6 text-start">
+            Date of reading: <span><%= note.formatted_date %></span>
+          </p>
+          <p class="lead fw-light fs-6 col-lg-6 col-4 text-end">
+            My Rating: <span><%= note.rating %></span> /10
+          </p>
+        </div>
+        <p class="noteBody"><%=note.note%></p>
+        <div class="d-flex justify-content-center mt-2">
+          <a href="/edit<%=note.id%>" class="btn btn-warning">Edit</a>
+          <form action="/delete<%=note.id%>" method="post" class="ms-3">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%}); %>
+  </div>
+</main>
