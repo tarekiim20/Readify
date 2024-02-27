@@ -152,6 +152,34 @@ app.post("/search", async (req, res) => {
   }
 });
 
+app.post("/filter", async (req, res) => {
+  const filter = req.body.filter;
+  try {
+    if (filter === "recency") {
+      const result = await db.query(
+        "SELECT *, TO_CHAR(date, 'DD-MM-YYYY') AS formatted_date FROM notes ORDER BY date DESC"
+      );
+      const notes = result.rows;
+      res.render("notes.ejs", { notes: notes });
+    } else if (filter === "rating") {
+      const result = await db.query(
+        "SELECT *, TO_CHAR(date, 'DD-MM-YYYY') AS formatted_date FROM notes ORDER BY rating DESC"
+      );
+      const notes = result.rows;
+      res.render("notes.ejs", { notes: notes });
+    } else {
+      const result = await db.query(
+        "SELECT *, TO_CHAR(date, 'DD-MM-YYYY') AS formatted_date FROM notes ORDER BY book ASC"
+      );
+      const notes = result.rows;
+      res.render("notes.ejs", { notes: notes });
+    }
+  } catch (error) {
+    console.log(error);
+    res.redirect("/notes");
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on the port: ${port}`);
 });
