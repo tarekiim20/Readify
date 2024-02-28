@@ -171,6 +171,8 @@
 
 #notesPage #header h1 {
   letter-spacing: 2px;
+  font-family: Merriweather, serif;
+  color: #cb997e !important;
 }
 
 #notesPage #header a {
@@ -188,6 +190,8 @@
 #notesContainer h2 {
   font-size: 1.5rem;
   line-height: 1.5;
+  font-family: "Merriweather", serif;
+  font-weight: 600;
 }
 
 #notesContainer h2 span {
